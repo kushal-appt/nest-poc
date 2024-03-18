@@ -1,0 +1,38 @@
+# volumes:
+#   mongodb_data:
+#     driver: local
+
+# services:
+#   mongodb:
+#     container_name: mongodb-nest
+#     image: mongo:jammy
+#     # restart: always
+#     ports:
+#       - ${MONGODB_HOST_PORT:-27017}:27017
+#     environment:
+#       MONGO_INITDB_ROOT_USERNAME: ${MONGODB_DEFAULT_USERNAME:-admin}
+#       MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_DEFAULT_PASSWORD:-admin}
+#     volumes:
+#       - mongodb_data:/data/db
+
+# networks:
+#   default:
+
+version: '3.4'
+
+services:
+  postgres:
+    image: postgres:${PG_VERSION:-latest}
+    # container_name: postgres
+    environment:
+      POSTGRES_DB: ${API_DB_NAME}
+      POSTGRES_USER: ${API_DB_USR_NAME}
+      POSTGRES_PASSWORD: ${API_DB_PASSWD}
+    ports:
+      - ${API_DB_PORT}:${API_DB_PORT}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+    driver: local
