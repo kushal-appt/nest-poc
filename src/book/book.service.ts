@@ -20,7 +20,6 @@ export class BooksService {
   }
 
   async getBookById(id: string): Promise<Book> {
-    // return this.bookRepo.findBy({ id: id });
     return await this.bookRepo.findOne({
       where: {
         id: id,
@@ -46,7 +45,6 @@ export class BooksService {
   }
 
   async deleteBook(id: string): Promise<boolean> {
-    //this.books = this.books.filter((book) => book.id !== id);
     const fetchedBook = await this.bookRepo.findOne({
       where: {
         id: id,
